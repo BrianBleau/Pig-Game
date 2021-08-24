@@ -27,7 +27,6 @@ const init = function () {
   current1.textContent = 0;
   current2.textContent = 0;
 
-  diceEl.classList.add("hidden");
   P1El.classList.remove("player--winner");
   P2El.classList.remove("player--winner");
   P1El.classList.add("player--active");
@@ -40,14 +39,16 @@ const swap = () => {
   if (P1El.classList.contains("player--active")) {
     P1El.classList.remove("player--active");
     P2El.classList.add("player--active");
+    document.querySelector(".backdrop").classList.remove("hidden");
   } else {
     P1El.classList.add("player--active");
     P2El.classList.remove("player--active");
+    document.querySelector(".backdrop").classList.remove("hidden");
   }
 };
 
 const roll = () => {
-  if ((playing = true)) {
+  if (playing === true) {
     let value = Math.trunc(Math.random() * 6 + 1);
 
     if (value > 1) {
@@ -94,3 +95,8 @@ holdEl.addEventListener("click", function () {
 });
 
 document.querySelector(".btn--new").addEventListener("click", init);
+document
+  .querySelector(".close-backdrop")
+  .addEventListener("click", function () {
+    document.querySelector(".backdrop").classList.add("hidden");
+  });
